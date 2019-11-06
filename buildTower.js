@@ -12,17 +12,18 @@ number of floors (integer and always greater than 0). for example, a tower of 3 
 */
 
 const towerBuilder = nFloors => {
-    let gapLength = nFloors - 1;
-    let substructureLength = 2 * gapLength + 1;
-    const tower = [];
-    const brick = '*';
+  const buildFloor = (bricks, spaceLength) =>
+    `${" ".repeat(spaceLength)}${"*".repeat(bricks)}${" ".repeat(spaceLength)}`;
 
-    for(let i=gapLength; i>=0; i--) {
-        let levelPadStart = brick.padStart(gapLength);
-        let levelPadEnd = brick.padEnd(gapLength);
-        brick = brick + '*'
-        tower.push(levelPadEnd);
-    }
+  let bricks = 2 * nFloors - 1;
+  let space = 0;
+  const tower = [];
 
-    return tower;
-}
+  while (bricks >= 1) {
+    tower.unshift(buildFloor(bricks, space));
+    bricks -= 2;
+    space++;
+  }
+
+  return tower;
+};
