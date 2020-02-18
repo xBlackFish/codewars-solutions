@@ -1,0 +1,1 @@
+import('./math').then(math => console.log(math.add(a+b)))
